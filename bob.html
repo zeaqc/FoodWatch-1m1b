@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FoodWatch — IBM Bob AI Assistant</title>
+  <meta name="description" content="Ask IBM Bob AI about food waste, government schemes, supply chain data, and personalised action plans." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Full-page chat interface */
+    .bob-page-hero {
+      background: linear-gradient(135deg, #0f3460 0%, #0f62fe 100%);
+      color: #fff;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .bob-page-hero h1 { font-size: clamp(1.8rem,4vw,2.8rem); margin-bottom: .75rem; }
+    .bob-page-hero p  { opacity:.88; max-width: 580px; margin: 0 auto; }
+
+    .chat-container {
+      max-width: 820px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .chat-window {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-window-header {
+      background: var(--blue-ibm);
+      color: #fff;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .chat-window-header .ibm-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .chat-window-header .info h3 { font-size: 1rem; font-weight: 700; }
+    .chat-window-header .info p  { font-size: .8rem; opacity: .8; }
+    .status-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #4ade80; margin-left: auto;
+      box-shadow: 0 0 6px #4ade80;
+    }
+
+    #page-messages {
+      min-height: 420px; max-height: 520px;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: .85rem;
+      background: #f0f4ff;
+    }
+
+    .pmsg { max-width: 78%; font-size: .9rem; line-height: 1.55; }
+    .pmsg.bot {
+      align-self: flex-start;
+      background: var(--surface);
+      color: var(--text);
+      padding: .75rem 1rem;
+      border-radius: 4px 14px 14px 14px;
+      border: 1px solid var(--border);
+    }
+    .pmsg.user {
+      align-self: flex-end;
+      background: var(--blue-ibm); color: #fff;
+      padding: .75rem 1rem;
+      border-radius: 14px 4px 14px 14px;
+    }
+    .pmsg.thinking { opacity: .65; font-style: italic; }
+    .pmsg .timestamp {
+      font-size: .7rem; opacity: .55; margin-top: .35rem; display: block;
+    }
+
+    .page-chips {
+      display: flex; flex-wrap: wrap; gap: .5rem;
+      padding: .75rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .page-input-row {
+      display: flex; gap: .75rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .page-input-row input {
+      flex: 1; padding: .65rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px; font-size: .9rem; outline: none;
+      transition: border-color .15s;
+    }
+    .page-input-row input:focus { border-color: var(--blue-ibm); }
+    .page-input-row button {
+      background: var(--blue-ibm); color: #fff;
+      border: none; border-radius: 10px;
+      padding: .65rem 1.25rem;
+      cursor: pointer; font-weight: 700; font-size: .9rem;
+    }
+
+    /* Capability cards */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+      gap: 1.1rem;
+    }
+    .cap-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .cap-card .icon { font-size: 1.6rem; margin-bottom: .5rem; }
+    .cap-card h4 { font-size: .92rem; font-weight: 700; color: var(--blue-ibm); margin-bottom: .3rem; }
+    .cap-card p  { font-size: .83rem; color: var(--muted); }
+
+    /* Integration guide */
+    .code-block {
+      background: #1e1e2e; color: #cdd6f4;
+      border-radius: 10px; padding: 1.25rem 1.5rem;
+      font-family: "Cascadia Code", "Fira Code", monospace;
+      font-size: .82rem; line-height: 1.7;
+      overflow-x: auto;
+    }
+    .code-block .comment { color: #6c7086; }
+    .code-block .key    { color: #89b4fa; }
+    .code-block .val    { color: #a6e3a1; }
+    .code-block .str    { color: #fab387; }
+  </style>
+</head>
+<body>
+<script src="js/shell.js"></script>
+<script>injectShell();</script>
+
+<!-- HERO -->
+<section class="bob-page-hero">
+  <div class="container">
+    <h1>🤖 IBM Bob — AI Food Waste Assistant</h1>
+    <p>Ask anything about food resource exploitation, government schemes, supply chain data, counter-measures, or your personal action plan. IBM Bob is powered by IBM watsonx and trained on food security data from FAO, ICAR, MoFPI, and WRI.</p>
+  </div>
+</section>
+
+<!-- FULL CHAT INTERFACE -->
+<div class="chat-container">
+  <div class="chat-window">
+    <div class="chat-window-header">
+      <div class="ibm-avatar">🤖</div>
+      <div class="info">
+        <h3>IBM Bob</h3>
+        <p>Food Resource Intelligence · Powered by IBM watsonx</p>
+      </div>
+      <div class="status-dot" title="Online"></div>
+    </div>
+
+    <div id="page-messages">
+      <div class="pmsg bot">
+        👋 Hello! I'm <strong>IBM Bob</strong>, your AI assistant for food resource intelligence.<br><br>
+        I have knowledge about:<br>
+        • Food waste statistics and causes<br>
+        • Primary-source exploitation patterns<br>
+        • India's government schemes (PMKSY, Operation Greens, eNAM, AIF, PMFBY)<br>
+        • Cold chain infrastructure gaps<br>
+        • Technology solutions (IBM Food Trust, watsonx AI, IoT cold chain)<br>
+        • NGOs and redistribution networks<br>
+        • Individual and community actions<br><br>
+        What would you like to explore today?
+        <span class="timestamp">IBM Bob · Just now</span>
+      </div>
+    </div>
+
+    <div class="page-chips">
+      <button class="chip" data-q="What are the main causes of food waste in India?">Causes in India</button>
+      <button class="chip" data-q="Tell me about government schemes">Govt schemes</button>
+      <button class="chip" data-q="What is cold chain and why does it matter?">Cold chain</button>
+      <button class="chip" data-q="How does IBM Food Trust work?">IBM Food Trust</button>
+      <button class="chip" data-q="How can I help reduce food waste?">How to help</button>
+      <button class="chip" data-q="What is the environmental impact of food waste?">Environment</button>
+      <button class="chip" data-q="Tell me about redistribution networks">Redistribution</button>
+      <button class="chip" data-q="What technology solutions exist for food waste?">Technology</button>
+    </div>
+
+    <div class="page-input-row">
+      <input type="text" id="page-bob-input" placeholder="Ask IBM Bob about food waste, schemes, technology…" />
+      <button id="page-bob-send">Ask Bob</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOB CAPABILITIES -->
+<section class="section alt">
+  <div class="container">
+    <h2 class="section-title">What IBM Bob Can Do for FoodWatch</h2>
+    <p class="section-sub">IBM Bob is more than a chatbot — it's a modular AI platform that can be deeply integrated into food security workflows.</p>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="icon">📊</div>
+        <h4>Data Q&A</h4>
+        <p>Answers questions grounded in FAO, ICAR, and government datasets — no hallucinated statistics.</p>
+      </div>
+      <div class="cap-card">
+        <div class="icon">🗺️</div>
+        <h4>Regional Analysis</h4>
+        <p>Identifies which crops, states, and supply-chain stages drive the most waste in a given region.</p>
+      </div>
+      <div class="cap-card">
+        <div class="icon">🏛️</div>
+        <h4>Scheme Advisor</h4>
+        <p>Recommends which government schemes a farmer, FPO, or processor is eligible for, with step-by-step application guidance.</p>
+      </div>
+      <div class="cap-card">
+        <div class="icon">⚡</div>
+        <h4>Action Planner</h4>
+        <p>Generates personalised food waste reduction action plans for individuals, restaurants, NGOs, and government offices.</p>
+      </div>
+      <div class="cap-card">
+        <div class="icon">🔔</div>
+        <h4>Glut Early Warning</h4>
+        <p>Integrated with eNAM/mandi arrival data to alert procurement agencies before price-crash waste events occur.</p>
+      </div>
+      <div class="cap-card">
+        <div class="icon">🌐</div>
+        <h4>Multilingual Support</h4>
+        <p>IBM watsonx supports 13+ Indian languages — making Bob accessible to farmers in Hindi, Marathi, Tamil, Telugu, and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATION GUIDE -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Integrating Real IBM Bob / watsonx Assistant</h2>
+    <p class="section-sub">To connect this website to a live IBM watsonx Assistant endpoint, replace the demo knowledge base with a real API call.</p>
+
+    <div class="two-col">
+      <div>
+        <h3 style="font-size:1rem;font-weight:700;color:var(--green-dark);margin-bottom:.75rem;">Step 1: Create a watsonx Assistant instance</h3>
+        <ol style="padding-left:1.2rem;font-size:.88rem;color:var(--muted);line-height:2;">
+          <li>Log in to <a href="https://cloud.ibm.com" target="_blank" rel="noopener">IBM Cloud</a></li>
+          <li>Create a <strong>watsonx Assistant</strong> service (Lite tier is free)</li>
+          <li>Build your assistant with food-waste intents and entities</li>
+          <li>Note your <strong>Integration ID</strong> and <strong>Region URL</strong></li>
+          <li>Enable the <strong>Web Chat</strong> integration under Environments</li>
+        </ol>
+
+        <h3 style="font-size:1rem;font-weight:700;color:var(--green-dark);margin:.75rem 0;">Step 2: Embed the Web Chat widget</h3>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:.75rem;">Replace the custom chat widget in <code>js/main.js</code> with the auto-generated IBM Web Chat snippet:</p>
+        <div class="code-block">
+<span class="comment">// In your HTML &lt;head&gt; or before &lt;/body&gt;:</span>
+<span class="key">window</span>.watsonAssistantChatOptions = {
+  <span class="key">integrationID</span>: <span class="str">"YOUR_INTEGRATION_ID"</span>,
+  <span class="key">region</span>:        <span class="str">"au-syd"</span>, <span class="comment">// or us-south, eu-de, etc.</span>
+  <span class="key">serviceInstanceID</span>: <span class="str">"YOUR_INSTANCE_ID"</span>,
+  <span class="key">onLoad</span>: <span class="key">async</span> (instance) => {
+    <span class="key">await</span> instance.render();
+  }
+};
+<span class="key">setTimeout</span>(() => {
+  <span class="key">const</span> t = document.createElement(<span class="str">'script'</span>);
+  t.src = <span class="str">"https://web-chat.global.assistant.watson.appdomain.cloud/versions/latest/WatsonAssistantChatEntry.js"</span>;
+  document.head.appendChild(t);
+}, <span class="val">0</span>);
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size:1rem;font-weight:700;color:var(--green-dark);margin-bottom:.75rem;">Step 3: REST API for custom integration</h3>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:.75rem;">For full control (custom UI, server-side logic), use the watsonx Assistant REST API:</p>
+        <div class="code-block">
+<span class="comment">// POST to create a session</span>
+POST <span class="str">/v2/assistants/{assistant_id}/sessions</span>
+Authorization: Basic <span class="val">base64(apikey)</span>
+
+<span class="comment">// POST a message</span>
+POST <span class="str">/v2/assistants/{id}/sessions/{sid}/message</span>
+Content-Type: application/json
+{
+  <span class="key">"input"</span>: {
+    <span class="key">"message_type"</span>: <span class="str">"text"</span>,
+    <span class="key">"text"</span>: <span class="str">"What is food waste?"</span>
+  }
+}
+
+<span class="comment">// Response includes:</span>
+{
+  <span class="key">"output"</span>: {
+    <span class="key">"generic"</span>: [{
+      <span class="key">"response_type"</span>: <span class="str">"text"</span>,
+      <span class="key">"text"</span>: <span class="str">"Food waste occurs when..."</span>
+    }]
+  }
+}
+        </div>
+
+        <div class="card blue" style="margin-top:1.25rem;">
+          <span class="badge blue">📚 IBM Bob</span>
+          <h3>IBM Bob Documentation</h3>
+          <p style="margin-bottom:.75rem;">IBM Bob is IBM's own AI assistant. You can use it directly to guide students, answer policy questions, and help users navigate government schemes — right within your site.</p>
+          <ul style="padding-left:1.1rem;font-size:.85rem;color:var(--muted);line-height:1.9;">
+            <li>Embed IBM Bob via the standard web chat widget</li>
+            <li>Configure custom greetings and starter questions</li>
+            <li>Add food-waste knowledge articles to Bob's knowledge base</li>
+            <li>Enable handoff to human experts for complex queries</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IBM ECOSYSTEM -->
+<section class="section alt">
+  <div class="container">
+    <h2 class="section-title">The IBM Food Security Ecosystem</h2>
+    <p class="section-sub">IBM's broader technology portfolio for food security — all of which can be orchestrated via IBM Bob.</p>
+    <div class="card-grid">
+      <div class="card blue">
+        <span class="badge blue">⛓️ Blockchain</span>
+        <h3>IBM Food Trust</h3>
+        <p>Built on Hyperledger Fabric. Tracks provenance from farm to shelf. Used by Walmart, Carrefour, Nestlé. Enables recall in seconds vs. days, preventing mass spoilage discards during food safety events.</p>
+      </div>
+      <div class="card blue">
+        <span class="badge blue">🤖 AI</span>
+        <h3>IBM watsonx.ai</h3>
+        <p>Foundation models fine-tuned on agricultural and food-supply data for demand forecasting, crop yield prediction, price volatility modelling, and natural language Q&A (powers IBM Bob).</p>
+      </div>
+      <div class="card blue">
+        <span class="badge blue">🌱 Sustainability</span>
+        <h3>IBM Sustainability Accelerator</h3>
+        <p>A free programme for NGOs and governments applying AI and hybrid cloud to tackle climate, food, and water challenges. Has supported food security projects in India, Africa, and Southeast Asia.</p>
+      </div>
+      <div class="card blue">
+        <span class="badge blue">⚙️ IoT + AI</span>
+        <h3>IBM Maximo + Cold Chain</h3>
+        <p>Asset management AI that monitors cold storage equipment health in real time, scheduling predictive maintenance before failures cause spoilage — reducing cold-chain breakdown events by up to 40%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Page-level Bob script -->
+<script>
+  // Extend the Bob knowledge base with extra topics for the full-page experience
+  const PAGE_KNOWLEDGE = {
+    "food trust": "IBM Food Trust is a blockchain solution built on Hyperledger Fabric. It creates a shared, immutable record of food system data — allowing every participant (farmer, processor, retailer) to trace any product from origin to shelf. Walmart uses it to reduce leafy-green trace time from 7 days to 2.2 seconds.",
+    "watsonx": "IBM watsonx.ai is IBM's enterprise AI and data platform. For food security, it powers demand forecasting models (reducing overstock waste by 25–30%), crop yield prediction, and natural language assistants like IBM Bob that help farmers and policymakers navigate complex data.",
+    "sustainability accelerator": "The IBM Sustainability Accelerator is a pro-bono programme where IBM provides technology, skills, and expertise to NGOs and governments tackling climate, food, and water crises. Projects in India have used AI to optimise government food grain procurement and reduce FCI storage overflow.",
+    "maximo": "IBM Maximo for cold chain uses AI and IoT sensor data to predict equipment failures before they happen — alerting maintenance teams to service compressors and refrigeration units proactively. This reduces cold-chain breakdowns that cause large-scale spoilage events.",
+    "integrate": "To integrate IBM Bob (watsonx Assistant) into your website: 1) Create a watsonx Assistant instance on IBM Cloud, 2) Build your assistant with food-waste intents, 3) Copy the Web Chat embed snippet, 4) Add it to your HTML. Full API docs are at cloud.ibm.com/docs/watson-assistant.",
+  };
+
+  function pageBobReply(msg) {
+    const lower = msg.toLowerCase();
+    for (const [k,v] of Object.entries(PAGE_KNOWLEDGE)) {
+      if (lower.includes(k)) return v;
+    }
+    // Fall back to main knowledge base
+    const BOB_KB = {
+      "food waste": "Globally, about **1.3 billion tonnes** of food is wasted every year — roughly one-third of all food produced. Primary-source losses (farm, harvest, storage) account for over 40% of that in developing nations.",
+      "primary source": "Primary-source waste occurs at **farm level**: over-harvesting, poor storage, lack of cold-chain infrastructure, and pest damage. In India alone, post-harvest losses are estimated at ₹92,000 crore annually.",
+      "government scheme": "Key Indian government schemes include: **PM Kisan Sampada Yojana**, **PMFBY** (crop insurance), **Operation Greens**, **eNAM**, **Agri Infrastructure Fund**, and the **NFSA**. See the Government page for full details.",
+      "cold chain": "Cold-chain infrastructure gaps cause up to **30% of perishable produce** to be lost before reaching consumers. India has only ~4% cold-chain penetration for fresh produce vs. 70%+ in developed nations.",
+      "counter": "Key counter-measures: solar cold storage, AI demand forecasting, IBM Food Trust blockchain, farmer price-alert apps, redistribution NGOs, mandatory composting laws, and tax incentives for food donation.",
+      "redistribute": "Redistribution platforms: **Feeding India** (Zomato), **Robin Hood Army**, **No Food Waste (Tamil Nadu)**. These connect restaurants, farms, and retailers with shelters and communities in real time.",
+      "technology": "Technology: IBM watsonx demand forecasting, IBM Food Trust blockchain, IoT cold-chain sensors, IBM Maximo predictive maintenance, satellite crop monitoring (ISRO FASAL), and farmer price-alert apps.",
+      "help": "Top actions: meal planning, buying ugly produce, proper storage, donating surplus, composting, understanding date labels, buying from FPO farmers, and advocating for cold-chain investment.",
+      "environment": "Wasted food accounts for **3.3 billion tonnes CO₂e** annually — more than any country except USA and China. It also wastes 250 km³ of water and 1.4 billion hectares of land used to grow food that is never eaten.",
+      "ibm": "IBM supports food security through: **watsonx.ai** (demand forecasting & chatbots), **IBM Food Trust** (blockchain traceability), **IBM Maximo** (cold-chain IoT), and the **IBM Sustainability Accelerator** (free support for NGOs/governments).",
+    };
+    for (const [k,v] of Object.entries(BOB_KB)) {
+      if (lower.includes(k)) return v;
+    }
+    if (lower.match(/hi|hello|hey/)) return "Hello! I'm IBM Bob, your food resource intelligence assistant. Ask me about food waste data, government schemes, IBM technology solutions, or how to take action!";
+    if (lower.includes('thank')) return "You're welcome! Every conversation about food waste brings us closer to solving it. 🌾";
+    return "I can help with: **food waste causes**, **India data**, **government schemes**, **cold chain**, **redistribution**, **IBM Food Trust**, **watsonx AI**, **environmental impact**, or **how to help**. What would you like to know?";
+  }
+
+  function renderMD(text) {
+    return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  }
+
+  function nowTime() {
+    return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  }
+
+  (function() {
+    const msgs  = document.getElementById('page-messages');
+    const input = document.getElementById('page-bob-input');
+    const send  = document.getElementById('page-bob-send');
+    const chips = document.querySelectorAll('.chip');
+
+    function addMsg(text, role) {
+      const el = document.createElement('div');
+      el.className = `pmsg ${role}`;
+      el.innerHTML = renderMD(text) + `<span class="timestamp">IBM Bob · ${nowTime()}</span>`;
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+      return el;
+    }
+
+    function sendMsg(text) {
+      if (!text.trim()) return;
+      // user bubble (no timestamp)
+      const uel = document.createElement('div');
+      uel.className = 'pmsg user';
+      uel.textContent = text;
+      msgs.appendChild(uel);
+      msgs.scrollTop = msgs.scrollHeight;
+      input.value = '';
+
+      const thinking = addMsg('Analysing with watsonx…', 'bot thinking');
+      setTimeout(() => {
+        thinking.remove();
+        addMsg(pageBobReply(text), 'bot');
+      }, 700);
+    }
+
+    send.addEventListener('click', () => sendMsg(input.value));
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMsg(input.value); });
+    chips.forEach(c => c.addEventListener('click', () => sendMsg(c.dataset.q)));
+  })();
+</script>
+
+<script src="js/main.js"></script>
+</body>
+</html>

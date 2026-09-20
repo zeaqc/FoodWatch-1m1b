@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FoodWatch — Solutions & Action</title>
+  <meta name="description" content="Counter-measures for food waste — technology, policy, community, and individual actions." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .action-step {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+    }
+    .step-icon {
+      font-size: 2rem; flex-shrink: 0;
+      width: 52px; height: 52px;
+      background: var(--green-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .action-step h4 { font-size: .95rem; font-weight: 700; color: var(--green-dark); margin-bottom: .25rem; }
+    .action-step p  { font-size: .87rem; color: var(--muted); line-height: 1.55; }
+
+    .org-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .org-card h4 { font-weight: 700; font-size:.95rem; color:var(--green-dark); }
+    .org-card .meta { font-size:.8rem; color:var(--muted); margin:.25rem 0; }
+  </style>
+</head>
+<body>
+<script src="js/shell.js"></script>
+<script>injectShell();</script>
+
+<!-- PAGE HERO -->
+<section class="hero" style="padding:3rem 2rem;">
+  <div class="container">
+    <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);">Solutions & Action</h1>
+    <p>The crisis is solvable. With the right mix of technology, policy, community action, and individual behaviour change — we can dramatically slash food waste from farm to fork. With <strong>70% of India's food loss originating in rural areas</strong> (MoFPI 2022–23), rural-specific solutions are not optional — they are the priority.</p>
+  </div>
+</section>
+
+<!-- TECH SOLUTIONS -->
+<section class="section alt">
+  <div class="container">
+    <h2 class="section-title">Technology-Driven Solutions</h2>
+    <p class="section-sub">From AI demand forecasting to blockchain traceability — technology is reshaping the food supply chain.</p>
+    <div class="card-grid">
+      <div class="card blue">
+        <span class="badge blue">🤖 AI / ML</span>
+        <h3>Demand Forecasting with IBM watsonx</h3>
+        <p>IBM watsonx models analyse historical sales, weather, festivals, and regional data to predict demand with 92%+ accuracy. Retailers and distributors can order exactly what's needed — reducing overstock waste by up to 30%.</p>
+      </div>
+      <div class="card blue">
+        <span class="badge blue">⛓️ Blockchain</span>
+        <h3>IBM Food Trust</h3>
+        <p>A blockchain-based platform (live with Walmart, Carrefour, Nestlé) that tracks food from farm to shelf in seconds instead of days. When contamination or spoilage is suspected, affected batches can be isolated immediately — preventing mass discards.</p>
+      </div>
+      <div class="card blue">
+        <span class="badge blue">📡 IoT</span>
+        <h3>Smart Cold Chain Monitoring</h3>
+        <p>IoT temperature and humidity sensors in reefer trucks and cold stores send real-time alerts when conditions go out of range. IBM Maximo integrates this data to schedule predictive maintenance — preventing breakdown-induced spoilage events.</p>
+      </div>
+      <div class="card green">
+        <span class="badge green">📱 Mobile</span>
+        <h3>Farmer Price Alert Apps</h3>
+        <p>Apps like Agmarknet, Kisan Suvidha, and custom AI chatbots deliver real-time mandi prices to farmers via SMS/WhatsApp, enabling them to choose the best market and avoid distress selling at exploitative rates.</p>
+      </div>
+      <div class="card green">
+        <span class="badge green">🛰️ Remote Sensing</span>
+        <h3>Satellite Crop Monitoring</h3>
+        <p>ISRO's FASAL programme and private platforms use satellite imagery to estimate crop yields 4–6 weeks before harvest — giving governments and traders advance warning of gluts, enabling pre-emptive procurement and redistribution.</p>
+      </div>
+      <div class="card green">
+        <span class="badge green">⚡ Energy</span>
+        <h3>Solar Cold Storage</h3>
+        <p>Off-grid solar-powered cold rooms (e.g., Inficold, CoolBot India) bring affordable refrigeration to villages without reliable power — the single most impactful intervention for reducing primary-source perishable losses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICY COUNTER-MEASURES -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Policy Counter-Measures</h2>
+    <p class="section-sub">Working with government to create systemic change at scale — the most powerful lever of all.</p>
+    <div class="two-col">
+      <div>
+        <div class="action-step">
+          <div class="step-icon">📋</div>
+          <div>
+            <h4>Mandatory Food Waste Reporting</h4>
+            <p>Legislation requiring large food businesses (supermarkets, hotels, restaurants) to measure and report food waste annually — as done in France (since 2016) and Korea. Public disclosure creates accountability and competitive pressure to improve.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <div class="step-icon">🚫</div>
+          <div>
+            <h4>Ban Supermarket Cosmetic Rejection</h4>
+            <p>France and Portugal have passed laws banning supermarkets from rejecting "ugly" produce on aesthetic grounds. Implementing similar legislation in India would save an estimated 15–20% of fruit and vegetable losses at the retail stage.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <div class="step-icon">🎁</div>
+          <div>
+            <h4>Tax Incentives for Food Donation</h4>
+            <p>India's Income Tax Act allows deduction under Section 80G for food donations to approved NGOs. Expanding this to 150% deduction (as in USA) would incentivise hotels, caterers, and supermarkets to donate surplus rather than discard.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <div class="step-icon">🏭</div>
+          <div>
+            <h4>Mandatory FPO Linkages</h4>
+            <p>Requiring large food companies and government procurement agencies to source a minimum percentage from Farmer Producer Organisations (FPOs) — ensuring farmers get fair prices and reducing the volume that is abandoned due to low returns.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="action-step">
+          <div class="step-icon">🌡️</div>
+          <div>
+            <h4>Cold Chain as Public Infrastructure</h4>
+            <p>Treating cold storage like roads — government-funded, publicly accessible cold chain hubs at mandis and rural collection centres. Rajasthan's "Rajasthan Warehousing Corporation" model offers a template for other states.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <div class="step-icon">📅</div>
+          <div>
+            <h4>Standardise Date Labelling</h4>
+            <p>The confusion between "Best Before" and "Use By" causes 20% of household food waste. India's FSSAI should mandate clear, standardised labelling with consumer education, reducing unnecessary early disposal of safe food.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <div class="step-icon">♻️</div>
+          <div>
+            <h4>Mandatory Composting for Bulk Generators</h4>
+            <p>Enforce the existing Solid Waste Management Rules 2016 requirement for bulk food waste generators (hotels, institutions, markets) to compost or anaerobically digest organic waste on-site or via contracted agencies.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <div class="step-icon">💻</div>
+          <div>
+            <h4>Digitalise Mandi Arrivals Data</h4>
+            <p>Mandate real-time digital reporting of mandi arrivals and prices (already partially done via eNAM) to enable AI-based early-warning systems for glut prediction and pre-emptive government procurement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RURAL COUNTER-MEASURES — NEW DEDICATED SECTION -->
+<section class="section" id="rural">
+  <div class="container">
+    <h2 class="section-title">🏘️ Counter-Measures for Rural India</h2>
+    <p class="section-sub">Since <strong>91% of villages lack cold storage</strong> (NITI Aayog, 2018) and <strong>68% of marginal farmers sell at harvest-time distress prices</strong> (NABARD, 2022), solutions must be grassroots-first, low-cost, and implementable without urban infrastructure. Here are proven, government-supported interventions.</p>
+
+    <div class="card-grid" style="margin-bottom:2rem;">
+      <div class="card green">
+        <span class="badge green">☀️ Infrastructure</span>
+        <h3>Village-Level Solar Cold Hubs</h3>
+        <p>Solar-powered cold rooms (2–5 MT capacity) at the panchayat level eliminate the need for grid electricity. <strong>PM-KUSUM Component A</strong> provides 60% subsidy on solar installations. Startups like <strong>Inficold</strong> and <strong>ColdBank</strong> deploy units at <strong>₹4–8 lakh</strong> — affordable via AIF or FPO pooling. Studies by ICAR (2022) show solar cold hubs reduce perishable losses by <strong>40–60%</strong> within a 5 km radius.</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Supported by: PM-KUSUM (MNRE); AIF (MoA&FW) · Evidence: ICAR 2022</div>
+      </div>
+      <div class="card green">
+        <span class="badge green">🏪 Market Access</span>
+        <h3>Village Collection Centres &amp; Primary Processing</h3>
+        <p>Primary processing units at the village level — grading tables, crates, weighing infrastructure — add <strong>15–20% to farmer realisation</strong> by reducing post-harvest damage before mandi transport. Under <strong>RKVY-RAFTAAR</strong> (₹7,150 Cr, 2023–24), states can fund <strong>Village Level Collection Centres (VLCCs)</strong> with sorting, grading, and primary packing facilities accessible to all farmers in a 3 km radius.</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Supported by: RKVY-RAFTAAR (MoA&FW, Budget 2023–24) · SMAM (MoA&FW)</div>
+      </div>
+      <div class="card green">
+        <span class="badge green">🤝 Collective Action</span>
+        <h3>FPO-Based Group Cold Storage &amp; Mandi Selling</h3>
+        <p>Farmer Producer Organisations (FPOs) pool harvests to achieve volume bargaining power, negotiate better mandi prices, and collectively invest in cold storage. The <strong>10,000 FPO Scheme</strong> (₹6,865 Cr) provides <strong>₹15 lakh grant + equity + credit guarantee</strong> per FPO. As of March 2023, <strong>3,231 FPOs</strong> are registered. NABARD data shows FPO-member farmers receive <strong>12–15% higher prices</strong> than non-members (NABARD FPO Impact Study, 2022).</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Supported by: SFAC / MoA&FW 10,000 FPO Scheme · Evidence: NABARD FPO Impact Study 2022</div>
+      </div>
+      <div class="card green">
+        <span class="badge green">🌾 Storage</span>
+        <h3>Community Grain Banks &amp; Warehouse Receipt Financing</h3>
+        <p>Community grain banks store surplus grain at village level, preventing distress selling at harvest-time lows. <strong>Grameen Bhandaran Yojana</strong> (15–25% capital subsidy) and NABARD's warehouse receipt financing allow farmers to borrow against stored grain — removing the compulsion to sell immediately. The <strong>Ministry of Tribal Affairs Grain Bank Scheme</strong> funds banks in tribal areas; expansion is needed. Currently cover &lt;4% of need (MoTA, 2022).</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Supported by: Grameen Bhandaran Yojana (MoRD); MoTA Grain Bank Scheme; NABARD WDRA</div>
+      </div>
+      <div class="card amber">
+        <span class="badge amber">👩‍🌾 Women-Led</span>
+        <h3>SHG-Based Food Processing Units (NRLM)</h3>
+        <p>Under <strong>DAY-NRLM</strong> (<strong>9.14 crore women in 83.57 lakh SHGs</strong> as of March 2023), rural women SHGs can receive <strong>revolving fund</strong> and <strong>Community Investment Fund (CIF)</strong> grants to establish village-level food processing units — pickles, papad, dried fruits, jams, spices. This converts surplus perishables into shelf-stable value-added products with 6–12 month shelf life, eliminating the seasonal waste peak. Units like <strong>Lijjat Papad</strong> and thousands of NRLM SHG units prove the model.</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Supported by: DAY-NRLM (MoRD) · SHG data: MoRD Annual Report 2022–23</div>
+      </div>
+      <div class="card amber">
+        <span class="badge amber">📱 Digital Access</span>
+        <h3>Farmer Market Information via SMS &amp; WhatsApp</h3>
+        <p>The <strong>Kisan Suvidha app</strong> (MoA&FW) and <strong>Agmarknet DACFW price portal</strong> provide real-time mandi prices to farmers. However, only <strong>38% of rural farmers</strong> use smartphones regularly (NSSO 2021). Low-tech solutions matter: <strong>IVR price hotlines</strong> (like mKisan, with 85+ lakh registered users) deliver prices via basic phone calls in local languages. These tools enable farmers to choose which mandi offers the best price, reducing distress selling.</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Tools: Kisan Suvidha (MoA&FW); Agmarknet (DACFW); mKisan (DoAC&FW) · Data: NSSO 2021</div>
+      </div>
+      <div class="card amber">
+        <span class="badge amber">🌱 Agronomy</span>
+        <h3>Zero-Budget Natural Farming &amp; Reduced Input Waste</h3>
+        <p>Zero-Budget Natural Farming (ZBNF), supported under the <strong>Andhra Pradesh government's RySS programme</strong> and adopted by <strong>NITI Aayog's Natural Farming Task Force</strong>, reduces input costs by 50–60% — meaning farmers are not forced to sell at any price to recover costs. With lower financial pressure, farmers can <strong>wait for better prices</strong> rather than dumping at harvest. Andhra Pradesh reported <strong>6.5 lakh farmers under ZBNF</strong> as of 2023 (AP RySS Annual Report 2022–23).</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Supported by: AP RySS; NITI Aayog Natural Farming TF; National Mission on Natural Farming (2023–24)</div>
+      </div>
+      <div class="card amber">
+        <span class="badge amber">🛣️ Last Mile</span>
+        <h3>PMGSY Road Connectivity for Market Access</h3>
+        <p>The <strong>Pradhan Mantri Gram Sadak Yojana (PMGSY)</strong> — with <strong>₹19,000 crore allocation in 2023–24</strong> — is connecting remaining unconnected habitations with all-weather roads. As of March 2023, <strong>7.51 lakh km of rural roads built</strong> since inception, but <strong>41% of targeted habitations still remain</strong> (PMGSY Progress Report 2023). Each connected village gains the ability to transport perishables to mandi in time — the most basic prerequisite for reducing farm-gate waste.</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Supported by: PMGSY (MoRD, Budget 2023–24 ₹19,000 Cr) · Progress: PMGSY Progress Report March 2023</div>
+      </div>
+      <div class="card blue">
+        <span class="badge blue">🤖 Technology</span>
+        <h3>Low-Cost IoT Monitoring for Village Cold Rooms</h3>
+        <p>Simple temperature &amp; humidity sensors (₹500–2,000) connected via SMS alerts (no smartphone needed) can notify farmers and SHG managers when cold room conditions fail. <strong>IBM Maximo</strong> at scale and low-cost equivalents like <strong>ESP32 + GSM boards</strong> (deployed by ICAR pilot programmes in Odisha and Bihar) have reduced cold room spoilage events by <strong>35%</strong> through early warning alerts. ICAR and NHB are supporting replication of this model across 500 cold hubs (NHB Annual Plan 2023–24).</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Supported by: IBM Maximo (cold chain IoT); ICAR IoT Pilot (Odisha/Bihar 2022); NHB Annual Plan 2023–24</div>
+      </div>
+      <div class="card blue">
+        <span class="badge blue">♻️ Waste-to-Value</span>
+        <h3>Biogas &amp; Composting from Farm Waste</h3>
+        <p>Under the <strong>GOBAR-Dhan (Galvanising Organic Bio-Agro Resources) Scheme</strong> (MoJSh), village-level biogas plants convert food and agricultural waste into cooking gas and organic manure. <strong>Budget 2023–24: ₹10,000 crore</strong> for 500 new waste-to-wealth plants in 75 districts. This eliminates the cost of disposing of surplus produce — making it economically viable to harvest even low-value crops, because they can be converted to biogas instead of being abandoned.</p>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.5rem;">📄 Supported by: GOBAR-Dhan Scheme (MoJSh, Budget 2023–24); SBM-G Phase II (MoRD)</div>
+      </div>
+    </div>
+
+    <!-- Rural Action Step-by-Step Guide -->
+    <div class="card blue" style="margin-top:.5rem;">
+      <span class="badge blue">📋 Implementation Pathway</span>
+      <h3>How a Village Can Act Right Now — Using Available Government Schemes</h3>
+      <ol style="padding-left:1.2rem;font-size:.88rem;color:var(--muted);line-height:2.2;">
+        <li><strong>Form an FPO</strong> → Apply under the 10,000 FPO Scheme (SFAC) → Receive ₹15 lakh handholding grant</li>
+        <li><strong>Apply for AIF loan</strong> (3% interest subvention) → Build a village cold room (2–5 MT solar-powered)</li>
+        <li><strong>Register on eNAM</strong> → Access real-time mandi prices → Sell when price is above distress level</li>
+        <li><strong>Register women SHGs under NRLM</strong> → Access CIF grants → Start pickle/drying/jam unit for surplus</li>
+        <li><strong>Apply for SMAM subsidy</strong> → Purchase crates, grading tables, dryers → Reduce transport damage</li>
+        <li><strong>Apply for Grameen Bhandaran subsidy</strong> → Build storage → Pledge grain for warehouse receipt loan</li>
+        <li><strong>Apply under PM-KUSUM Component A</strong> → Solar power for cold room → Reduce power-cut spoilage</li>
+        <li><strong>Register on mKisan / Kisan Suvidha</strong> → Get daily price alerts → Never sell blind again</li>
+      </ol>
+      <p style="font-size:.82rem;color:var(--muted);margin-top:.75rem;">All 8 steps are available under existing central government schemes as of 2023–24. Contact your nearest Krishi Vigyan Kendra (KVK), District Agriculture Office, or NABARD District Development Manager to begin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY & NGO ACTIONS -->
+<section class="section alt">
+  <div class="container">
+    <h2 class="section-title">Community & NGO Solutions</h2>
+    <p class="section-sub">Civil society organisations are filling the gaps that government schemes don't reach — connecting surplus to need.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+      <div class="org-card">
+        <h4>🦸 Robin Hood Army</h4>
+        <div class="meta">Pan-India &nbsp;|&nbsp; Founded 2014 &nbsp;|&nbsp; 1.3M+ meals/year</div>
+        <p style="font-size:.85rem;color:var(--muted);">Collects surplus food from restaurants and events, distributes to underprivileged communities. Zero administration cost model.</p>
+      </div>
+      <div class="org-card">
+        <h4>🍽️ Feeding India (Zomato)</h4>
+        <div class="meta">Pan-India &nbsp;|&nbsp; 50+ cities &nbsp;|&nbsp; 10M+ meals distributed</div>
+        <p style="font-size:.85rem;color:var(--muted);">Surplus food app connecting donors (individuals, caterers, hotels) with nearby NGOs and shelters in real time.</p>
+      </div>
+      <div class="org-card">
+        <h4>🥗 No Food Waste (Tamil Nadu)</h4>
+        <div class="meta">South India &nbsp;|&nbsp; 500+ hunger spots mapped</div>
+        <p style="font-size:.85rem;color:var(--muted);">Maps hunger spots and food donors on a single platform. Has served over 3 million meals since 2013.</p>
+      </div>
+      <div class="org-card">
+        <h4>🌾 PRADAN</h4>
+        <div class="meta">Rural India &nbsp;|&nbsp; 9 states &nbsp;|&nbsp; FPO support</div>
+        <p style="font-size:.85rem;color:var(--muted);">Builds farmer producer organisations and helps smallholders access better prices, reducing distress selling and farm-gate waste.</p>
+      </div>
+      <div class="org-card">
+        <h4>🧊 Inficold Solar Storage</h4>
+        <div class="meta">Rural electrification &nbsp;|&nbsp; Off-grid cold rooms</div>
+        <p style="font-size:.85rem;color:var(--muted);">Deploys solar-powered cold storage units to villages without reliable electricity — directly attacking primary-source perishable loss.</p>
+      </div>
+      <div class="org-card">
+        <h4>📱 Too Good To Go (India-entering)</h4>
+        <div class="meta">Global &nbsp;|&nbsp; 80M+ app users</div>
+        <p style="font-size:.85rem;color:var(--muted);">App that lets restaurants and bakeries sell surplus food at a discount before closing — turning potential waste into affordable meals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDIVIDUAL ACTION -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">What YOU Can Do Right Now</h2>
+    <p class="section-sub">Individual choices aggregate into massive systemic change. Here are 10 high-impact actions.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;">
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">1</div>
+        <div><h4>Plan Meals Before Shopping</h4><p>Buying only what you'll use in the next 3–4 days reduces household waste by an average of 25%.</p></div>
+      </div>
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">2</div>
+        <div><h4>Buy Ugly Produce</h4><p>Imperfect-looking vegetables taste identical. Choosing them signals market demand, preventing rejection waste.</p></div>
+      </div>
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">3</div>
+        <div><h4>Store Food Correctly</h4><p>Learn which produce needs refrigeration vs. room temperature. Proper storage doubles average shelf life.</p></div>
+      </div>
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">4</div>
+        <div><h4>Donate Surplus Food</h4><p>Connect with Robin Hood Army or local shelters to donate cooked/packaged surplus from events and gatherings.</p></div>
+      </div>
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">5</div>
+        <div><h4>Compost at Home</h4><p>Kitchen composting converts food scraps into nutrient-rich fertiliser, keeping organic waste out of landfills where it produces methane.</p></div>
+      </div>
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">6</div>
+        <div><h4>Understand Date Labels</h4><p>"Best Before" = quality indicator (food is often still safe after). "Use By" = safety deadline. Don't discard prematurely.</p></div>
+      </div>
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">7</div>
+        <div><h4>Order Smaller Portions</h4><p>Restaurant plate waste accounts for 8% of all food waste. Ordering à la carte and taking leftovers home makes a real difference.</p></div>
+      </div>
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">8</div>
+        <div><h4>Support FPO Farmers Directly</h4><p>Buy from farmer markets, organic boxes, or direct-from-farm apps. Removing middlemen improves farmer returns and reduces mandi waste.</p></div>
+      </div>
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">9</div>
+        <div><h4>Advocate &amp; Vote</h4><p>Support candidates and policies that fund cold chain infrastructure, mandate food waste reporting, and protect farmer MSP rights.</p></div>
+      </div>
+      <div class="action-step">
+        <div class="step-icon" style="font-size:1.5rem;width:44px;height:44px;">10</div>
+        <div><h4>Ask IBM Bob</h4><p>Use the AI assistant on this site to explore data, find local NGOs, understand government schemes, and get personalised action plans.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--green-dark);color:#fff;text-align:center;">
+  <div class="container">
+    <h2 style="font-size:1.8rem;font-weight:800;margin-bottom:.75rem;">Ready to Act?</h2>
+    <p style="opacity:.88;max-width:540px;margin:0 auto 1.5rem;">Whether you want to volunteer, advocate, invest in technology, or just start at home — IBM Bob can guide your next step.</p>
+    <div class="cta-row">
+      <a href="bob.html" class="btn btn-ibm">Get My Action Plan from IBM Bob</a>
+      <a href="government.html" class="btn btn-outline">See Govt Schemes</a>
+    </div>
+  </div>
+</section>
+
+<script src="js/main.js"></script>
+</body>
+</html>
