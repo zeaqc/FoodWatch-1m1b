@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: foodwatch-platform
+    runtime: node
+    plan: free
+    rootDir: platform
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PORT
+        value: 10000

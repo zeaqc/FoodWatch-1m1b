@@ -71,6 +71,19 @@ app.use('/api/impact',    impactRoutes);
 // ── Health check ───────────────────────────────────────────────
 app.get('/api/health', (req, res) => res.json({ status: 'ok', env: process.env.NODE_ENV }));
 
+// ── Serve React frontend in production ────────────────────────
+if (process.env.NODE_ENV === 'production') {
+  const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build');
+  app.use(express.static(clientBuildPath));
+
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+      return next();
+    }
+    res.sendFile(path.join(clientBuildPath, 'index.html'));
+  });
+}
+
 // ── 404 handler ────────────────────────────────────────────────
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
 

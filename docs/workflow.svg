@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" width="100%" height="100%" style="background:#f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <style>
+      .header-title { font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .header-sub { font-size: 13px; fill: #64748b; }
+      .lane-title { font-size: 14px; font-weight: 600; fill: #334155; }
+      .node-text { font-size: 12px; fill: #1e293b; font-weight: 500; }
+      .node-sub { font-size: 11px; fill: #64748b; }
+      .decision-text { font-size: 11px; fill: #92400e; font-weight: 600; text-anchor: middle; }
+      .edge-label { font-size: 11px; fill: #475569; font-weight: 600; }
+      .status-text { font-size: 11px; font-weight: 700; text-anchor: middle; }
+    </style>
+    <!-- Arrow marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+    </marker>
+  </defs>
+
+  <!-- Title Card -->
+  <rect x="24" y="16" width="1152" height="60" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="44" y="42" class="header-title">FoodWatch System Workflow and State Lifecycle</text>
+  <text x="44" y="61" class="header-sub">Operational lifecycle showing real user actions, state transitions, atomic claims, and automated jobs</text>
+
+  <!-- Swimlane 1: Donor -->
+  <rect x="24" y="90" width="270" height="660" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <rect x="24" y="90" width="270" height="38" rx="8" fill="#e2e8f0"/>
+  <text x="40" y="114" class="lane-title">1. Donor (Hotel / Caterer)</text>
+
+  <!-- Swimlane 2: Platform API & State Machine -->
+  <rect x="306" y="90" width="310" height="660" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <rect x="306" y="90" width="310" height="38" rx="8" fill="#e2e8f0"/>
+  <text x="322" y="114" class="lane-title">2. FoodWatch API &amp; State Engine</text>
+
+  <!-- Swimlane 3: Receiver (NGO / Shelter) -->
+  <rect x="628" y="90" width="270" height="660" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <rect x="628" y="90" width="270" height="38" rx="8" fill="#e2e8f0"/>
+  <text x="644" y="114" class="lane-title">3. Receiver (NGO / Shelter)</text>
+
+  <!-- Swimlane 4: Automated Jobs & Metrics -->
+  <rect x="910" y="90" width="266" height="660" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1"/>
+  <rect x="910" y="90" width="266" height="38" rx="8" fill="#f3e8ff"/>
+  <text x="926" y="114" class="lane-title" fill="#6b21a8">4. Automated Jobs &amp; Metrics</text>
+
+  <!-- ================= LANE 1 NODES ================= -->
+  <!-- D1: Register & Verify -->
+  <rect x="44" y="150" width="230" height="52" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="56" y="172" class="node-text">Register &amp; Phone Verification</text>
+  <text x="56" y="189" class="node-sub">Mobile OTP confirmed via SMS</text>
+
+  <!-- D2: Post Donation -->
+  <rect x="44" y="234" width="230" height="68" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="56" y="255" class="node-text">Post Surplus Food Listing</text>
+  <text x="56" y="271" class="node-sub">Quantity, shelf life, photos</text>
+  <text x="56" y="287" class="node-sub">Pickup address &amp; geo-coordinates</text>
+
+  <!-- D3: Receive Claim Alert -->
+  <rect x="44" y="440" width="230" height="54" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="56" y="462" class="node-text">Receive In-App Notification</text>
+  <text x="56" y="479" class="node-sub">Receiver details &amp; estimated ETA</text>
+
+  <!-- D4: Handover Food -->
+  <rect x="44" y="556" width="230" height="52" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="56" y="578" class="node-text">Physical Food Handover</text>
+  <text x="56" y="595" class="node-sub">Safety inspection at pickup spot</text>
+
+
+  <!-- ================= LANE 2 NODES (STATE ENGINE) ================= -->
+  <!-- S1: Validate & Calculate Expiry -->
+  <rect x="326" y="234" width="270" height="68" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+  <text x="338" y="255" class="node-text">Validate Safety &amp; Ingestion</text>
+  <text x="338" y="271" class="node-sub">expiresAt = preparedAt + shelfLife</text>
+  <text x="338" y="287" class="node-sub">Status set to: AVAILABLE</text>
+
+  <!-- Status Pill: AVAILABLE -->
+  <rect x="406" y="324" width="110" height="26" rx="13" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="461" y="341" class="status-text" fill="#15803d">AVAILABLE</text>
+
+  <!-- Decision: Atomic Claim Check -->
+  <polygon points="461,388 566,432 461,476 356,432" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="461" y="428" class="decision-text">Atomic Lock</text>
+  <text x="461" y="443" class="decision-text">available?</text>
+
+  <!-- Status Pill: CLAIMED -->
+  <rect x="406" y="510" width="110" height="26" rx="13" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="461" y="527" class="status-text" fill="#854d0e">CLAIMED</text>
+
+  <!-- Status Pill: COLLECTED -->
+  <rect x="406" y="630" width="110" height="26" rx="13" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="461" y="647" class="status-text" fill="#1d4ed8">COLLECTED</text>
+
+
+  <!-- ================= LANE 3 NODES (RECEIVER) ================= -->
+  <!-- R1: Register Receiver -->
+  <rect x="648" y="150" width="230" height="52" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="660" y="172" class="node-text">Register NGO / Kitchen</text>
+  <text x="660" y="189" class="node-sub">Verify phone &amp; NGO credentials</text>
+
+  <!-- R2: Browse & Filter -->
+  <rect x="648" y="310" width="230" height="54" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="660" y="331" class="node-text">Browse Live Leaflet Map</text>
+  <text x="660" y="348" class="node-sub">Filter by distance, diet &amp; servings</text>
+
+  <!-- R3: Initiate Claim -->
+  <rect x="648" y="405" width="230" height="54" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="660" y="427" class="node-text">Claim Listing</text>
+  <text x="660" y="444" class="node-sub">Sends atomic claim request</text>
+
+  <!-- R4: Mark Collected -->
+  <rect x="648" y="556" width="230" height="52" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="660" y="578" class="node-text">Click "I've Collected"</text>
+  <text x="660" y="595" class="node-sub">Confirms food received safely</text>
+
+  <!-- R5: Rate & Review -->
+  <rect x="648" y="650" width="230" height="52" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="660" y="672" class="node-text">1-5 Star Donor Review</text>
+  <text x="660" y="689" class="node-sub">Feedback on food quality &amp; timing</text>
+
+
+  <!-- ================= LANE 4 NODES (CRON & IMPACT) ================= -->
+  <!-- C1: Expiry Cron -->
+  <rect x="928" y="234" width="230" height="68" rx="6" fill="#ffffff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="940" y="255" class="node-text" fill="#6b21a8">Expiry Job (Every 5 mins)</text>
+  <text x="940" y="271" class="node-sub">Checks expiresAt &lt;= now</text>
+  <text x="940" y="287" class="node-sub">Warns donors at 30 min mark</text>
+
+  <!-- Status Pill: EXPIRED -->
+  <rect x="988" y="350" width="110" height="26" rx="13" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="1043" y="367" class="status-text" fill="#b91c1c">EXPIRED</text>
+
+  <!-- C2: Impact Calculation -->
+  <rect x="928" y="620" width="230" height="82" rx="6" fill="#ffffff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="940" y="642" class="node-text" fill="#6b21a8">SDG Impact Engine</text>
+  <text x="940" y="659" class="node-sub">+ Meals rescued (qty x 2.5)</text>
+  <text x="940" y="675" class="node-sub">+ CO2 prevented (2.5 kg/kg)</text>
+  <text x="940" y="691" class="node-sub">+ Water conserved (1,050 L/kg)</text>
+
+
+  <!-- ================= CONNECTING ARROWS ================= -->
+  <!-- D1 -> D2 -->
+  <line x1="159" y1="202" x2="159" y2="234" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- D2 -> S1 -->
+  <line x1="274" y1="268" x2="326" y2="268" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S1 -> AVAILABLE -->
+  <line x1="461" y1="302" x2="461" y2="324" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+  <!-- AVAILABLE -> Cron check -->
+  <line x1="516" y1="337" x2="988" y2="363" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrow-red)"/>
+  <text x="740" y="346" class="edge-label" fill="#dc2626">Unclaimed &amp; past shelf-life</text>
+
+  <!-- AVAILABLE -> R2 Browse -->
+  <line x1="461" y1="350" x2="461" y2="370" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="461" y1="370" x2="648" y2="337" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- R2 -> R3 Claim -->
+  <line x1="763" y1="364" x2="763" y2="405" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- R3 -> Decision Lock -->
+  <line x1="648" y1="432" x2="566" y2="432" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Decision Yes -> CLAIMED -->
+  <line x1="461" y1="476" x2="461" y2="510" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="470" y="496" class="edge-label" fill="#16a34a">Yes</text>
+
+  <!-- Decision No (conflict) -> Back to R2 -->
+  <path d="M 356 432 L 336 432 L 336 380 L 763 380 L 763 364" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3"/>
+  <text x="300" y="415" class="edge-label" fill="#dc2626">Already claimed</text>
+
+  <!-- CLAIMED -> D3 Notify Donor -->
+  <line x1="406" y1="523" x2="274" y2="467" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- D3 -> D4 Handover -->
+  <line x1="159" y1="494" x2="159" y2="556" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- D4 Handover & R4 Collect meet -->
+  <line x1="274" y1="582" x2="648" y2="582" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3"/>
+
+  <!-- R4 -> COLLECTED -->
+  <line x1="648" y1="595" x2="516" y2="643" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- COLLECTED -> Impact engine -->
+  <line x1="516" y1="643" x2="928" y2="661" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- R4 -> R5 Review -->
+  <line x1="763" y1="608" x2="763" y2="650" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+</svg>
