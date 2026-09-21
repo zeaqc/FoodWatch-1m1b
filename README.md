@@ -121,48 +121,56 @@ project/
 - Node.js (v18 or higher)
 - MongoDB (running locally or a MongoDB Atlas URI)
 
-### 1. Clone and install
+### ⚡ Quick Start (Windows)
+Simply double-click `start_platform.bat` (or run `.\start_platform.bat` in your terminal). It will automatically:
+- Set up local `.env` files from `.env.example`
+- Install all necessary dependencies for server and client
+- Launch both the client (`http://localhost:3000`) and API server (`http://localhost:5000`) concurrently.
+
+---
+
+### 💻 Manual Setup & Run
+
+#### 1. Clone the repository
 ```bash
 git clone https://github.com/zeaqc/FoodWatch-1m1b.git
-cd FoodWatch-1m1b/platform
+cd FoodWatch-1m1b
+```
+
+#### 2. Install all dependencies
+```bash
 npm run install:all
 ```
-This installs dependencies for the root runner, the server, and the client.
+*(Installs dependencies for the root runner, the server, and the client).*
 
-### 2. Configure environment variables
-
-**Backend (`platform/server/.env`):**
+#### 3. Configure environment variables
+Copy the template files for both backend and frontend:
 ```bash
-cd server
-cp .env.example .env
-```
-Fill in the basic values:
-```ini
-PORT=5000
-NODE_ENV=development
-MONGO_URI=mongodb://localhost:27017/foodwatch
-JWT_SECRET=your_random_jwt_secret_key
-CLIENT_URL=http://localhost:3000
-```
-*(Note: If SMS_API_KEY is left empty, OTP codes will be printed directly to the server terminal console for easy local testing).*
+# Windows PowerShell:
+Copy-Item platform\server\.env.example platform\server\.env
+Copy-Item platform\client\.env.example platform\client\.env
 
-**Frontend (`platform/client/.env`):**
-```bash
-cd ../client
-cp .env.example .env
-```
-Default content:
-```ini
-REACT_APP_API_URL=/api
+# macOS / Linux:
+cp platform/server/.env.example platform/server/.env
+cp platform/client/.env.example platform/client/.env
 ```
 
-### 3. Run the development server
-From the `platform/` folder:
+Ensure your MongoDB instance is running (local MongoDB on port 27017, or set `MONGO_URI` to a MongoDB Atlas cluster URI in `platform/server/.env`).
+
+#### 4. Run the development server
+From the repository root:
 ```bash
-npm run dev
+npm start
 ```
-- Client runs at `http://localhost:3000`
-- Server runs at `http://localhost:5000`
+- Frontend client runs at `http://localhost:3000`
+- Backend API runs at `http://localhost:5000`
+
+---
+
+### 📽️ Static Research & Presentation Deck
+To view the static policy research hub or the interactive slide presentation:
+- **Presentation Deck**: Open `presentation.html` in your browser or download [`FoodWatch_Project_Presentation.pptx`](FoodWatch_Project_Presentation.pptx).
+- **Policy Hub**: Open `index.html`, `problem.html`, `solutions.html`, or `government.html`.
 
 ### 4. Create an admin user (optional)
 To access the admin dashboard, create an admin entry directly in your MongoDB database:
