@@ -15,6 +15,7 @@ function injectShell() {
       <a href="government.html">Government</a>
       <a href="solutions.html">Solutions</a>
       <a href="bob.html">🤖 IBM Bob</a>
+      <a href="presentation.html" style="color:var(--green-mid); font-weight:700;">📽️ Presentation</a>
     </div>`;
   document.body.insertBefore(nav, document.body.firstChild);
 
@@ -28,6 +29,7 @@ function injectShell() {
       <a href="government.html">Government</a>
       <a href="solutions.html">Solutions</a>
       <a href="bob.html">IBM Bob AI</a>
+      <a href="presentation.html">Presentation Deck</a>
     </div>
     <p>© 2025 FoodWatch Initiative &nbsp;|&nbsp; Built with IBM Bob AI &nbsp;|&nbsp; Data: FAO, MoFPI, ICAR</p>`;
   document.body.appendChild(footer);

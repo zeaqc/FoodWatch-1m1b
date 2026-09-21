@@ -68,6 +68,19 @@ app.use('/api/ratings',   ratingRoutes);
 app.use('/api/admin',     adminRoutes);
 app.use('/api/impact',    impactRoutes);
 
+// ── Presentation download route ────────────────────────────────
+app.get(['/api/presentation/download', '/FoodWatch_Project_Presentation.pptx'], (req, res) => {
+  const pptxPath = path.resolve(__dirname, '..', '..', '..', 'FoodWatch_Project_Presentation.pptx');
+  if (fs.existsSync(pptxPath)) {
+    return res.download(pptxPath, 'FoodWatch_Project_Presentation.pptx');
+  }
+  const altPath = path.resolve(__dirname, '..', '..', 'client', 'public', 'FoodWatch_Project_Presentation.pptx');
+  if (fs.existsSync(altPath)) {
+    return res.download(altPath, 'FoodWatch_Project_Presentation.pptx');
+  }
+  return res.status(404).json({ message: 'Presentation file not found' });
+});
+
 // ── Health check ───────────────────────────────────────────────
 app.get('/api/health', (req, res) => res.json({ status: 'ok', env: process.env.NODE_ENV }));
 

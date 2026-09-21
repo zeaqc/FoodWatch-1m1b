@@ -72,6 +72,7 @@ flowchart TD
 - **Collection tracking and reviews**: Receivers mark items as collected and leave a 1 to 5 star rating for the donor.
 - **Impact tracker**: Live counters for estimated meals saved, kilograms rescued, and water/carbon footprint diverted.
 - **Research and policy hub**: A collection of static reference pages covering post-harvest data from ICAR/FAO and relevant government programs (PMKSY, RKVY).
+- **Presentation Deck**: Includes an executive 12-slide presentation ([`FoodWatch_Project_Presentation.pptx`](file:///c:/Users/pranjal/OneDrive/Documents/project/FoodWatch_Project_Presentation.pptx)) and an interactive web slide deck ([`presentation.html`](file:///c:/Users/pranjal/OneDrive/Documents/project/presentation.html)) with speaker notes for 1M1B reviews and project evaluations.
 
 ---
 
