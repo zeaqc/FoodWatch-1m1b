@@ -4,6 +4,7 @@
   "description": "FoodWatch SDG 2 Zero Hunger Surplus Food Platform",
   "scripts": {
     "install:all": "cd platform && npm run install:all",
+    "setup:env": "node setup_env.js",
     "dev": "cd platform && npm run dev",
     "start": "cd platform && npm run dev",
     "build": "cd platform && npm run build",

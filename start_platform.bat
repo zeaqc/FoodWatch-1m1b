@@ -4,17 +4,10 @@ echo   FoodWatch - Zero Hunger Surplus Redistribution Platform
 echo ========================================================
 echo.
 
-cd platform
+echo [1/3] Checking environment files ^& uploads directory...
+node "%~dp0setup_env.js"
 
-echo [1/3] Checking environment files...
-if not exist "server\.env" (
-    echo Creating server\.env from .env.example...
-    copy server\.env.example server\.env >nul
-)
-if not exist "client\.env" (
-    echo Creating client\.env from .env.example...
-    copy client\.env.example client\.env >nul
-)
+cd "%~dp0platform"
 
 echo [2/3] Checking dependencies...
 if not exist "node_modules" (
